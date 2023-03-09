@@ -1,12 +1,9 @@
-CFLAGS=-c -o
+CFLAGS=-fopenmp
 
-all: serial.o openmp.o
-
-openmp.o:
-	gcc $(CFLAGS) openmp.o openmp_decomposition.c -fopenmp
-
-serial.o:
-	gcc $(CFLAGS) serial.o serial_decomposition.c -fopenmp
+all: mpi.o
+	
+mpi.o:
+	mpicc -c -o mpi.o mpi_decomposition.c
 
 clean:
-	rm -rf serial.o openmp.o
+	rm -rf mpi.o
