@@ -119,10 +119,20 @@ int main(int argc, char **argv)
 
  	time_read2 = omp_get_wtime();
 
- 	time1 = omp_get_wtime();
-    serial_cholesky_decomposition(matrix, lower, n);
-	time2 = omp_get_wtime();
-    printf("[SERIAL] Time elapsed: %lf seconds\n", (time2-time1));
+    // #ifdef SERIAL
+    //     time1 = omp_get_wtime();
+    //     serial_cholesky_decomposition(matrix, lower, n);
+    // 	time2 = omp_get_wtime();
+
+    //     printf("[Serial] Time elapsed: %lf seconds\n", (time2-time1));
+    // #elif OPENMP
+        time1 = omp_get_wtime();
+        openmp_cholesky_decomposition(matrix, lower, n);
+    	time2 = omp_get_wtime();
+
+        printf("[Paralel] Time elapsed: %lf seconds\n", (time2-time1));
+    // #endif
+
     
     write_matrix(file_out);
 
